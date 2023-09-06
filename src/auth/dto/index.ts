@@ -11,7 +11,8 @@ export interface UserDto {
     role?: string;
     skill: string[];
     certification: string[];
-    accessToken?: string
+    accessToken?: string;
+    refreshToken?: string;
 }
 
 export class FileUploadDto {

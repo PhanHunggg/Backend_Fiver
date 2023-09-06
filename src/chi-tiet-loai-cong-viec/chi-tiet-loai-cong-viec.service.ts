@@ -46,7 +46,10 @@ export class ChiTietLoaiCongViecService {
     async getTypeDetailJob(res: any) {
         const checkTypeDetail = await this.prisma.typeDetail.findMany();
 
-        if (!checkTypeDetail) errCode(res, checkTypeDetail, "Không có chi loại công việc")
+        if (!checkTypeDetail) {
+            errCode(res, checkTypeDetail, "Không có chi loại công việc");
+            return;
+        }
 
         successCode(res, checkTypeDetail)
     }
@@ -143,6 +146,6 @@ export class ChiTietLoaiCongViecService {
             }
         })
 
-        successCode(res, id_type_detail)
+        successCode(res, checkTypeDetail)
     }
 }

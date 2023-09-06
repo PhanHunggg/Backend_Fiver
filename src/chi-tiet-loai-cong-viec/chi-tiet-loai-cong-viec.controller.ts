@@ -62,5 +62,6 @@ export class ChiTietLoaiCongViecController {
         return this.typeDetailJobService.deleteTypeDetail(res, id_type_detail)
     }
 
+    
 
 }

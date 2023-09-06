@@ -23,19 +23,57 @@ export class AuthService {
                 }
             })
 
-            if (!checkUser) errCode(res, user.email, "Không tìm thấy tài khoản")
+            if (!checkUser) {
+                errCode(res, user.email, "Không tìm thấy tài khoản");
+                return
+            }
 
-            if (checkUser.password !== user.password) errCode(res, user.password, "Mật khẩu không đúng");
+            if (checkUser.password !== user.password) {
+                errCode(res, user.password, "Mật khẩu không đúng");
+                return
+            }
 
-            const token = this.jwtService.sign({ data: checkUser }, { secret: this.config.get("SECRET_KEY"), expiresIn: "30m" })
+            const token = await this.signAccessToken(checkUser.id_user);
+            const refreshToken = await this.signRefreshToken(checkUser.id_user);
 
             let data: UserDto = checkUser
 
             data.accessToken = token;
+            data.refreshToken = refreshToken;
 
             successCode(res, data)
         } catch (error) {
             failCode(res, error.message)
+        }
+    }
+
+    async signAccessToken(userId: number) {
+        try {
+            const payload = await this.prisma.user.findFirst({
+                where: {
+                    id_user: userId
+                }
+            })
+
+            return this.jwtService.sign({ data: payload }, { secret: this.config.get("SECRET_KEY"), expiresIn: "5m" });
+
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    }
+
+    async signRefreshToken(userId: number) {
+        try {
+            const payload = await this.prisma.user.findFirst({
+                where: {
+                    id_user: userId
+                }
+            })
+
+            return this.jwtService.sign({ data: payload }, { secret: this.config.get("SECRET_KEY"), expiresIn: "2d" });
+
+        } catch (error) {
+            throw new Error(error.message)
         }
     }
 
@@ -65,5 +103,9 @@ export class AuthService {
             failCode(res, error.message)
 
         }
+    }
+
+    async verifyAccessToken(token: string) {
+       
     }
 }

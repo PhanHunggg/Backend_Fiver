@@ -10,23 +10,7 @@ export class CongViecService {
 
     async createJob(res: any, image: string, job: JobInterface) {
 
-        const { job_name, rate, salary, describe, short_description, star, id_creator, id_type_detail } = job;
+        
 
-        const newData = await this.prisma.job.create({
-            data: {
-                job_name,
-                rate,
-                salary,
-                image,
-                describe,
-                short_description,
-                star,
-                id_type_detail,
-                id_creator
-
-            }
-        })
-
-        successCode(res, newData)
     }
 }

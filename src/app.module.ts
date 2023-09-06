@@ -10,9 +10,10 @@ import { NguoiDungModule } from './nguoi-dung/nguoi-dung.module';
 import { SkillModule } from './skill/skill.module';
 import { ThueCongViecModule } from './thue-cong-viec/thue-cong-viec.module';
 import { ConfigModule } from '@nestjs/config';
+import { DanhMucCongViecModule } from './danh-muc-cong-viec/danh-muc-cong-viec.module';
 
 @Module({
-  imports: [AuthModule, BinhLuanModule, ChiTietLoaiCongViecModule, CongViecModule, LoaiCongViecModule, NguoiDungModule, SkillModule, ThueCongViecModule, ConfigModule.forRoot({ isGlobal: true })],
+  imports: [AuthModule, BinhLuanModule, ChiTietLoaiCongViecModule, CongViecModule, LoaiCongViecModule, NguoiDungModule, SkillModule, ThueCongViecModule, ConfigModule.forRoot({ isGlobal: true }), DanhMucCongViecModule],
   controllers: [AppController],
   providers: [AppService],
 })
