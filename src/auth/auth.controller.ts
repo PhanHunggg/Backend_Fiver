@@ -13,6 +13,13 @@ export class AuthController {
 
     constructor(private readonly authService: AuthService) { }
 
+
+    @UseGuards(AtGuard)
+    @Get('/profile')
+    profile(@GetCurrentUserId() userId: number, @Response() res: any): Promise<void> {
+        return this.authService.profile(res, userId);
+    }
+
     @Public()
     @Post("/login")
     login(@Response() res: any, @Body() body: LoginInterFace): Promise<Tokens> {
@@ -39,11 +46,7 @@ export class AuthController {
         return this.authService.logout(res, userId);
     }
 
-    @UseGuards(AtGuard)
-    @Get('/profile')
-    profile(@GetCurrentUserId() userId: number, @Response() res: any): Promise<void> {
-        return this.authService.profile(res, userId);
-    }
+  
 
     @Public()
     @UseGuards(RtGuard)
