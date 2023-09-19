@@ -19,8 +19,8 @@ export class JobInterface {
     @ApiProperty({ description: "star", type: Number })
     star: number;
 
-    @ApiProperty({ description: "job_name", type: Number })
-    id_type_detail: number;
+    @ApiProperty({ description: "id_job_catalog", type: Number })
+    id_job_catalog: number;
 
     @ApiProperty({ description: "id_creator", type: Number })
     id_creator: number;

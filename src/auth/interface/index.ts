@@ -1,10 +1,15 @@
 import { ApiProperty } from "@nestjs/swagger"
+import { IsNotEmpty, IsString } from "class-validator";
 
 
 export class LoginInterFace {
+    @IsNotEmpty()
+    @IsString()
     @ApiProperty({ description: "email", type: String })
     email: string;
 
+    @IsNotEmpty()
+    @IsString()
     @ApiProperty({ description: "password", type: String })
     password: string;
 }
@@ -36,5 +41,7 @@ export class SignUpInterface {
 
     @ApiProperty({ description: "certification", type: String })
     certification?: string[];
+
+    hash?: string;
 
 }

@@ -44,6 +44,8 @@ model User {
   role          String    @db.VarChar(150)
   skill         String[]  @db.VarChar(255)
   certification String[]  @db.VarChar(255)
+  hash          String?   @db.VarChar(255)
+  hashedRt      String?   @db.VarChar(255)
   jobs          Job[]
   hiredBy       HireJob[]
   comments      Comment[]
