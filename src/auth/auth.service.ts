@@ -1,11 +1,11 @@
-import { async } from 'rxjs';
+import {  } from 'rxjs';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaClient } from '@prisma/client';
 import { LoginInterFace, SignUpInterface } from './interface';
 import { errCode, failCode, successCode } from 'src/config/response';
-import { UserDto, UserSignUpDto } from './dto';
+import { UserSignUpDto } from './dto';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload, Tokens } from './types';
 

@@ -1,11 +1,9 @@
 import { failCode } from 'src/config/response';
 import { NguoiDungService } from './nguoi-dung.service';
-import { Controller, Get, Response, Put, Post, Body, Param, UseInterceptors, UploadedFile } from '@nestjs/common';
-import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Response, Put, Post, Body, Param } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { SignUpInterface } from 'src/auth/interface';
-import { FileUploadDto } from 'src/auth/dto';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
+
 
 @ApiTags("NguoiDung")
 @Controller('nguoi-dung')
