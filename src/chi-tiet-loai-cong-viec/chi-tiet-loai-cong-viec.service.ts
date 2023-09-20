@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { TypeDetailInterface, UpdateTypeDetailInterface } from './interface';
-import { errCode, successCode } from 'src/config';
+import { errCode, successCode } from 'src/response';
 import { async } from 'rxjs';
 
 @Injectable()

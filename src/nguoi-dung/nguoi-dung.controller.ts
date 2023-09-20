@@ -1,4 +1,4 @@
-import { failCode } from 'src/config';
+import { failCode } from 'src/response';
 import { NguoiDungService } from './nguoi-dung.service';
 import { Controller, Get, Response, Put, Post, Body, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';

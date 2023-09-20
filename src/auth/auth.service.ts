@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaClient } from '@prisma/client';
 import { LoginInterFace, SignUpInterface } from './interface';
-import { errCode, failCode, successCode } from 'src/config';
+import { errCode, failCode, successCode } from 'src/response';
 import { UserSignUpDto } from './dto';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload, Tokens } from './types';

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { HireJobInterface } from './interface';
 import { DateTime } from 'luxon';
-import { errCode, failCode, successCode } from 'src/config';
+import { errCode, failCode, successCode } from 'src/response';
 
 @Injectable()
 export class ThueCongViecService {
