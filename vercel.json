@@ -1,0 +1,13 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "D:\\Workspace\\Nest\\fiver",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "D:\\Workspace\\Nest\\fiver" }
+    ]
+  }
+  
