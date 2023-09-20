@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Response, UseGuards } from '@nestjs/common
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { LoginInterFace, SignUpInterface } from './interface';
-import { failCode } from 'src/config/index';
+import { failCode } from 'src/config';
 import { Tokens } from './types';
 import { GetCurrentUser, GetCurrentUserId, Public } from '../common/decorators';
 import { AtGuard, RtGuard } from '../common/guards';
