@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { errCode, failCode, successCode } from 'src/config/response';
+import { errCode, failCode, successCode } from 'src/config/index';
 import { HireJobInterface } from './interface';
 import { DateTime } from 'luxon';
 
