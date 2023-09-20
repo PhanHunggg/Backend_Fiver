@@ -5,7 +5,7 @@ import { LoginInterFace, SignUpInterface } from './interface';
 import { Tokens } from './types';
 import { GetCurrentUser, GetCurrentUserId, Public } from '../common/decorators';
 import { AtGuard, RtGuard } from '../common/guards';
-import { failCode } from 'src/auth/response';
+import { failCode } from '../response/index';
 
 @ApiTags("Auth")
 @Controller('auth')

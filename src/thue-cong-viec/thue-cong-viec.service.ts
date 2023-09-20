@@ -2,12 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { HireJobInterface } from './interface';
 import { DateTime } from 'luxon';
-import { errCode, failCode, successCode } from 'src/auth/response';
+import { errCode, failCode, successCode } from '../response/index';
 
 @Injectable()
 export class ThueCongViecService {
 
     prisma = new PrismaClient();
+    localModule = require('../response/index');
 
     async getHireJobList(res: any) {
 
@@ -18,7 +19,6 @@ export class ThueCongViecService {
                 errCode(res, checkHireJob, "Chưa có công việc nào được thuê");
                 return
             }
-
             successCode(res, checkHireJob);
         } catch (error) {
             failCode(res, error.message)

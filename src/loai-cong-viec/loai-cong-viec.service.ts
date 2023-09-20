@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { errCode, successCode } from 'src/auth/response';
+import { errCode, successCode } from '../response/index';
 import { createTypeJobInterface } from './interface';
 
 @Injectable()

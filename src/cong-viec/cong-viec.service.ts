@@ -2,7 +2,7 @@ import { async } from 'rxjs';
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { JobInterface } from './interface';
-import { errCode, failCode, successCode } from 'src/auth/response';
+import { errCode, failCode, successCode } from '../response/index';
 
 @Injectable()
 export class CongViecService {

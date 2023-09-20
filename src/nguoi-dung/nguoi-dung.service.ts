@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { SignUpInterface } from 'src/auth/interface';
-import { errCode, failCode, successCode } from 'src/auth/response';
+import { errCode, failCode, successCode } from '../response/index';
 
 @Injectable()
 export class NguoiDungService {
