@@ -1,4 +1,4 @@
-export const successCode = (res, data, message?) => {
+export const successCode = (res, data: any, message?: string) => {
     return res.status(200).json({
         statusCode: "200",
         message: message ? message : "Xử lý thành công",
@@ -6,7 +6,7 @@ export const successCode = (res, data, message?) => {
     })
 }
 
-export const errCode = (res, data, message) => {
+export const errCode = (res, data: any, message: string) => {
     return res.status(400).json({
         statusCode: "400",
         message,
@@ -14,7 +14,7 @@ export const errCode = (res, data, message) => {
     })
 }
 
-export const failCode = (res, message) => {
+export const failCode = (res, message: string) => {
     return res.status(500).json({
         statusCode: "500",
         message,
