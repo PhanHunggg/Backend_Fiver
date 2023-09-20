@@ -7,7 +7,7 @@ import { LoginInterFace, SignUpInterface } from './interface';
 import { UserSignUpDto } from './dto';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload, Tokens } from './types';
-import { errCode, failCode, successCode } from 'src/response';
+import { errCode, failCode, successCode } from 'src/auth/response';
 
 @Injectable()
 export class AuthService {
