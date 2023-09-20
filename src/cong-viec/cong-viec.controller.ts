@@ -4,7 +4,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { JobInterface } from './interface';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { FileUploadDto } from 'src/auth/dto';
+import { FileUploadDto } from '../auth/dto/index';
 
 @ApiTags("CongViec")
 @Controller('cong-viec')

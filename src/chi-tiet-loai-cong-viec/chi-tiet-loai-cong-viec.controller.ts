@@ -4,7 +4,7 @@ import { ChiTietLoaiCongViecService } from './chi-tiet-loai-cong-viec.service';
 import { diskStorage } from 'multer';
 import { TypeDetailInterface, UpdateTypeDetailInterface } from './interface';
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { FileUploadDto } from 'src/auth/dto';
+import { FileUploadDto } from '../auth/dto/index';
 
 @ApiTags("ChiTietLoaiCongViec")
 @Controller('chi-tiet-loai-cong-viec')
