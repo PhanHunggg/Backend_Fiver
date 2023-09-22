@@ -24,14 +24,9 @@ export class ChiTietLoaiCongViecController {
 
 
     @Post("/them-chi-tiet-loai-cong-viec")
-    @UseInterceptors(FileInterceptor('image', {
-        storage: diskStorage({
-            destination: process.cwd() + '/public/img/type-detail',
-            filename: (req, file, callback) => callback(null, Date.now() + "_" + file.originalname)
-        })
-    }))
+    @UseInterceptors(FileInterceptor('image'))
     createTypeDetailJob(@Response() res: any, @Body() body: TypeDetailInterface, @UploadedFile() file: Express.Multer.File) {
-        return this.typeDetailJobService.createTypeDetailJob(res, body, file.filename);
+        return this.typeDetailJobService.createTypeDetailJob(res, body, file);
 
     }
 
@@ -46,14 +41,9 @@ export class ChiTietLoaiCongViecController {
         description: "Upload image type details",
         type: FileUploadDto
     })
-    @UseInterceptors(FileInterceptor('image', {
-        storage: diskStorage({
-            destination: process.cwd() + "/public/img/type-detail",
-            filename: (req, file, callback) => callback(null, Date.now() + "_" + file.originalname)
-        })
-    }))
+    @UseInterceptors(FileInterceptor('image'))
     updateImgTypeDetail(@Response() res: any, @Param('id_type_detail') id_type_detail: string, @UploadedFile() file: Express.Multer.File) {
-        return this.typeDetailJobService.updateImgTypeDetail(res, id_type_detail, file.filename)
+        return this.typeDetailJobService.updateImgTypeDetail(res, id_type_detail, file)
     }
 
     @Delete("/xoa-chi-tiet-loai/:id_type_detail")

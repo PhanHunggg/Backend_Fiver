@@ -1,10 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Response, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { CongViecService } from './cong-viec.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
 import { JobInterface } from './interface';
-import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { FileUploadDto } from '../auth/dto/index';
+import {  ApiTags } from '@nestjs/swagger';
 
 @ApiTags("CongViec")
 @Controller('cong-viec')
@@ -40,14 +38,9 @@ export class CongViecController {
 
 
     @Post("/them-cong-viec")
-    @UseInterceptors(FileInterceptor('image', {
-        storage: diskStorage({
-            destination: process.cwd() + "/public/img/job",
-            filename: (req, file, callback) => callback(null, Date.now() + "_" + file.originalname)
-        })
-    }))
+    @UseInterceptors(FileInterceptor('image'))
     createJob(@Response() res: any, @UploadedFile() file: Express.Multer.File, @Body() body: JobInterface) {
-        return this.jobService.createJob(res, file.filename, body);
+        return this.jobService.createJob(res, file, body);
     }
 
     @Put("/cap-nhat-cong-viec/:id_job")
@@ -56,21 +49,10 @@ export class CongViecController {
 
     }
 
-
     @Put("/cap-nhat-hinh-anh-cong-viec/:id_job")
-    @ApiConsumes("multipart/form-data")
-    @ApiBody({
-        description: "Upload image type details",
-        type: FileUploadDto
-    })
-    @UseInterceptors(FileInterceptor('image', {
-        storage: diskStorage({
-            destination: process.cwd() + "/public/img/job",
-            filename: (req, file, callback) => callback(null, Date.now() + "_" + file.originalname)
-        })
-    }))
+    @UseInterceptors(FileInterceptor('image'))
     updateImgJob(@Response() res: any, @Param('id_job') id_job: string, @UploadedFile() file: Express.Multer.File) {
-        return this.jobService.updateImgJob(res, id_job, file.filename)
+        return this.jobService.updateImgJob(res, id_job, file)
     }
 
     @Delete("/xoa-cong-viec/:id_job")

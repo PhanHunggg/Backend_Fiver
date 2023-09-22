@@ -3,13 +3,17 @@ import { PrismaClient } from '@prisma/client';
 import { TypeDetailInterface, UpdateTypeDetailInterface } from './interface';
 import { errCode, successCode } from '../response/index';
 import { async } from 'rxjs';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class ChiTietLoaiCongViecService {
 
+    constructor(private cloudinary: CloudinaryService) { }
+
+
     prisma = new PrismaClient();
 
-    async createTypeDetailJob(res: any, job: TypeDetailInterface, image: string) {
+    async createTypeDetailJob(res: any, job: TypeDetailInterface, image: Express.Multer.File) {
 
         const typeDetailJobList = await this.prisma.typeDetail.findMany();
 
@@ -26,11 +30,12 @@ export class ChiTietLoaiCongViecService {
 
         const { detail_name, id_type_job } = job
 
+        const imgUrl = await this.cloudinary.uploadImage(image)
 
         await this.prisma.typeDetail.create({
             data: {
                 detail_name,
-                image,
+                image: imgUrl,
                 typeJob: {
                     connect: {
                         id_type_job: Number(id_type_job)
@@ -101,7 +106,7 @@ export class ChiTietLoaiCongViecService {
 
     }
 
-    async updateImgTypeDetail(res: any, id_type_detail: string, image: string) {
+    async updateImgTypeDetail(res: any, id_type_detail: string, image: Express.Multer.File) {
 
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
@@ -114,16 +119,18 @@ export class ChiTietLoaiCongViecService {
             return;
         }
 
+        const imgUrl = await this.cloudinary.uploadImage(image)
+
         await this.prisma.typeDetail.update({
             data: {
-                image
+                image: imgUrl
             },
             where: {
                 id_type_detail: Number(id_type_detail)
             }
         })
 
-        successCode(res, image)
+        successCode(res, imgUrl)
 
 
     }

@@ -1,12 +1,14 @@
 import { async } from 'rxjs';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { JobInterface } from './interface';
 import { errCode, failCode, successCode } from '../response/index';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Injectable()
 export class CongViecService {
 
+    constructor(private cloudinary: CloudinaryService) { }
     prisma = new PrismaClient();
 
     async getJobList(res: any) {
@@ -155,7 +157,7 @@ export class CongViecService {
     }
 
 
-    async createJob(res: any, image: string, job: JobInterface) {
+    async createJob(res: any, image: Express.Multer.File, job: JobInterface) {
         try {
 
             const checkUser = await this.prisma.user.findFirst({
@@ -174,6 +176,7 @@ export class CongViecService {
                 return;
             };
 
+            const imgUrl: string = await this.cloudinary.uploadImage(image)
 
 
             await this.prisma.job.create({
@@ -181,7 +184,7 @@ export class CongViecService {
                     job_name: job.job_name,
                     rate: job.rate,
                     salary: Number(job.salary),
-                    image: image,
+                    image: imgUrl,
                     describe: job.describe,
                     short_description: job.short_description,
                     star: Number(job.star),
@@ -250,33 +253,26 @@ export class CongViecService {
         }
     }
 
-    async updateImgJob(res: any, id_job: string, image: string) {
+    async updateImgJob(res: any, id_job: string, file: Express.Multer.File) {
 
         try {
-            const checkJob = await this.prisma.job.findFirst({
-                where: {
-                    id_job: Number(id_job),
-                }
-            })
-
-            if (!checkJob) {
-                errCode(res, id_job, "Không tìm thấy công việc!");
-                return;
-            }
+            const imgUrl = await this.cloudinary.uploadImage(file)
 
             await this.prisma.job.update({
-                data: {
-                    image,
-                },
                 where: {
                     id_job: Number(id_job)
+                },
+                data: {
+                    image: imgUrl
                 }
             })
 
-            successCode(res, image)
+            successCode(res, imgUrl)
         } catch (error) {
-            failCode(res, error.message)
+            failCode(res, error.message);
         }
+
+
     }
 
     async deleteJob(res: any, id_job: string) {

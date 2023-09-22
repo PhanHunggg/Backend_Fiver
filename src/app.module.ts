@@ -13,13 +13,17 @@ import { ConfigModule } from '@nestjs/config';
 import { DanhMucCongViecModule } from './danh-muc-cong-viec/danh-muc-cong-viec.module';
 import { AtGuard } from './common/guards';
 import { APP_GUARD } from '@nestjs/core';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+
+
 
 @Module({
-  imports: [AuthModule, BinhLuanModule, ChiTietLoaiCongViecModule, CongViecModule, LoaiCongViecModule, NguoiDungModule, SkillModule, ThueCongViecModule, ConfigModule.forRoot({ isGlobal: true }), DanhMucCongViecModule],
+  imports: [AuthModule, BinhLuanModule, ChiTietLoaiCongViecModule, CongViecModule, LoaiCongViecModule, NguoiDungModule, SkillModule, ThueCongViecModule, ConfigModule.forRoot({ isGlobal: true }), DanhMucCongViecModule, CloudinaryModule],
   controllers: [AppController],
-  providers: [AppService, {
-    provide: APP_GUARD,
-    useClass: AtGuard,
-  },],
+  providers: [AppService],
 })
 export class AppModule { }
+/*, {
+    provide: APP_GUARD,
+    useClass: AtGuard,
+  },*/
