@@ -5,6 +5,6 @@ import { PrismaClient } from '@prisma/client';
 export class AppService {
 
   prisma = new PrismaClient();
-
+ 
 
 }
