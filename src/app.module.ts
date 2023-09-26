@@ -14,16 +14,11 @@ import { DanhMucCongViecModule } from './danh-muc-cong-viec/danh-muc-cong-viec.m
 import { AtGuard } from './common/guards';
 import { APP_GUARD } from '@nestjs/core';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 
 
 
 @Module({
-  imports: [AuthModule, BinhLuanModule, ChiTietLoaiCongViecModule, CongViecModule, LoaiCongViecModule, NguoiDungModule, SkillModule, ThueCongViecModule, ConfigModule.forRoot({ isGlobal: true }), DanhMucCongViecModule, CloudinaryModule, ServeStaticModule.forRoot({
-    rootPath: join(__dirname, '..', 'swagger-static'),
-    serveRoot: process.env.NODE_ENV === 'development' ? '/' : '/swagger',
-  }),],
+  imports: [AuthModule, BinhLuanModule, ChiTietLoaiCongViecModule, CongViecModule, LoaiCongViecModule, NguoiDungModule, SkillModule, ThueCongViecModule, ConfigModule.forRoot({ isGlobal: true }), DanhMucCongViecModule, CloudinaryModule, ],
   controllers: [AppController],
   providers: [AppService],
 })
