@@ -25,6 +25,7 @@
     "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/serve-static": "^4.0.0",
     "@nestjs/swagger": "^7.0.12",
     "@prisma/client": "^4.16.1",
     "buffer-to-stream": "^1.0.0",
