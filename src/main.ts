@@ -4,7 +4,7 @@ import * as express from 'express';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { SwaggerModule } from "@nestjs/swagger"
 import { ValidationPipe } from '@nestjs/common';
-import { get } from 'http';
+import { get } from 'https';
 import { createWriteStream } from 'fs';
 
 async function bootstrap() {
@@ -59,7 +59,7 @@ async function bootstrap() {
     `Swagger UI css file written to: '/swagger-static/swagger-ui.css'`,
   );
     });
-
   }
+  
 }
 bootstrap();
