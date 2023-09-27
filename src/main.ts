@@ -35,7 +35,7 @@ async function bootstrap() {
     console.log(`Swagger JSON file written to: '/swagger-static/swagger.json'`);
   }
 
-  const serverUrl = "https://fiver-sever.vercel.app/" || "http://localhost:8080"
+  const serverUrl = "https://fiver-sever.vercel.app"
 
   if (process.env.NODE_ENV === 'development') {
 
