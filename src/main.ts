@@ -74,12 +74,6 @@ async function bootstrap() {
   );
     });
 
-    get(`${serverUrl}/swagger/index.html`, function (response) {
-      response.pipe(createWriteStream('swagger-static/index.html'));
-      console.log(
-    `Swagger UI css file written to: '/swagger-static/index.html'`,
-  );
-    });
   }
   
 }
