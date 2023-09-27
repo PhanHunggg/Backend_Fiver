@@ -1,4 +1,4 @@
-import {  } from 'rxjs';
+import { } from 'rxjs';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
@@ -55,6 +55,7 @@ export class AuthService {
 
 
     async signUp(res: any, user: SignUpInterface): Promise<Tokens> {
+
         try {
             const checkEmail = await this.prisma.user.findFirst({
                 where: {
@@ -97,12 +98,11 @@ export class AuthService {
             await this.updateRtHash(newUser.id_user, tokens.refreshToken)
 
             successCode(res, tokens)
-
         } catch (error) {
-
             failCode(res, error.message)
-
         }
+
+
     }
 
     async logout(res: any, userId: number): Promise<void> {

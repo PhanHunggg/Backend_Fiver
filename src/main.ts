@@ -5,7 +5,8 @@ import { DocumentBuilder } from '@nestjs/swagger';
 import { SwaggerModule } from "@nestjs/swagger"
 import { ValidationPipe } from '@nestjs/common';
 import { get } from 'https';
-import { createWriteStream } from 'fs';
+import { createWriteStream, writeFileSync } from 'fs';
+import { resolve } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -20,6 +21,19 @@ async function bootstrap() {
   app.use(express.static("."))
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(8080);
+  // get the swagger json file (if app is running in development mode)
+  if (process.env.NODE_ENV === 'development') {
+    const pathToSwaggerStaticFolder = resolve(process.cwd(), 'swagger-static');
+
+    // write swagger json file
+    const pathToSwaggerJson = resolve(
+      pathToSwaggerStaticFolder,
+      'swagger.json',
+    );
+    const swaggerJson = JSON.stringify(document, null, 2);
+    writeFileSync(pathToSwaggerJson, swaggerJson);
+    console.log(`Swagger JSON file written to: '/swagger-static/swagger.json'`);
+  }
 
   // const serverUrl = "https://fiver-sever.vercel.app/" || "http://localhost:8080"
 
