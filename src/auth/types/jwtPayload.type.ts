@@ -5,6 +5,6 @@ export type JwtPayload = {
     phone: string;
     birth_day: Date;
     gender: boolean;
-    skill: string[];
-    certification: string[];
+    skill: string;
+    certification: string;
 };

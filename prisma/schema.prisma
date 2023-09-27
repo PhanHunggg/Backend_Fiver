@@ -1,13 +1,14 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+generator client {
+  provider = "prisma-client-js"
 }
 
 model TypeJob {
@@ -42,9 +43,9 @@ model User {
   birth_day     DateTime?
   gender        Boolean
   role          String    @db.VarChar(150)
-  skill         String[]  @db.VarChar(255)
-  certification String[]  @db.VarChar(255)
-  hash          String?   @db.VarChar(255)
+  skill         String  @db.VarChar(255)
+  certification String  @db.VarChar(255)
+  hash          String  @db.VarChar(255)
   hashedRt      String?   @db.VarChar(255)
   jobs          Job[]
   hiredBy       HireJob[]

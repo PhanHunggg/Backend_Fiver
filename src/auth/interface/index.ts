@@ -37,10 +37,10 @@ export class SignUpInterface {
     role: string;
 
     @ApiProperty({ description: "skill", type: String })
-    skill: string[];
+    skill: string;
 
     @ApiProperty({ description: "certification", type: String })
-    certification?: string[];
+    certification?: string;
 
     hash?: string;
 

@@ -24,8 +24,8 @@ export interface UserSignUpDto {
     birth_day: Date;
     gender: boolean;
     role: string;
-    skill: string[];
-    certification: string[];
+    skill: string;
+    certification: string;
     hash: string;
     hashedRt: string;
 }

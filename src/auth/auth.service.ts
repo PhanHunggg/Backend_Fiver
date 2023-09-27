@@ -78,7 +78,18 @@ export class AuthService {
             newData.birth_day = new Date(user.birth_day)
 
             const newUser = await this.prisma.user.create({
-                data: newData
+                data: {
+                    name: newData.name,
+                    email: newData.email,
+                    password: newData.password,
+                    phone: newData.phone,
+                    birth_day: newData.birth_day,
+                    gender: newData.gender,
+                    role: newData.role,
+                    skill: newData.skill,
+                    certification: newData.certification,
+                    hash: newData.hash
+                }
             })
 
             const tokens = await this.getTokens(newUser)
