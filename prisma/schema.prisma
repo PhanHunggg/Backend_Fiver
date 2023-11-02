@@ -2,67 +2,65 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
 }
-
 model TypeJob {
-  id_type_job   Int          @id @default(autoincrement())
-  type_job_name String       @db.VarChar(150)
+  id_type_job   String       @id @default(auto()) @map("_id") @db.ObjectId
+  type_job_name String
   typeDetails   TypeDetail[]
 }
 
 model TypeDetail {
-  id_type_detail Int          @id @default(autoincrement())
-  detail_name    String       @db.VarChar(150)
-  image          String       @db.VarChar(255)
-  id_type_job    Int
+  id_type_detail String        @id @default(auto()) @map("_id") @db.ObjectId
+  detail_name    String
+  image          String
+  id_type_job    String
   typeJob        TypeJob      @relation(fields: [id_type_job], references: [id_type_job])
   jobCatalog     JobCatalog[]
 }
 
 model JobCatalog {
-  id_job_catalog   Int        @id @default(autoincrement())
-  name_job_catalog String     @db.VarChar(150)
-  id_type_detail   Int
+  id_job_catalog   String       @id @default(auto()) @map("_id") @db.ObjectId
+  name_job_catalog String
+  id_type_detail   String
   typeDetail       TypeDetail @relation(fields: [id_type_detail], references: [id_type_detail])
   jobs             Job[]
 }
 
 model User {
-  id_user       Int       @id @default(autoincrement())
-  name          String    @db.VarChar(50)
-  email         String    @db.VarChar(150)
-  password      String    @db.VarChar(255)
-  phone         String    @db.VarChar(50)
-  birth_day     DateTime?
+  id_user       String      @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  email         String
+  password      String
+  phone         String
+  birth_day     DateTime? // Có thể cần thay đổi kiểu dữ liệu tại đây
   gender        Boolean
-  role          String    @db.VarChar(150)
-  skill         String  @db.VarChar(255)
-  certification String  @db.VarChar(255)
-  hash          String  @db.VarChar(255)
-  hashedRt      String?   @db.VarChar(255)
+  role          String
+  skill         String
+  certification String
+  hash          String
+  hashedRt      String?
   jobs          Job[]
   hiredBy       HireJob[]
   comments      Comment[]
 }
 
 model Job {
-  id_job            Int        @id @default(autoincrement())
-  job_name          String     @db.VarChar(150)
-  rate              String     @db.VarChar(255)
+  id_job            String       @id @default(auto()) @map("_id") @db.ObjectId
+  job_name          String
+  rate              String
   salary            Int
-  image             String     @db.VarChar(255)
-  describe          String     @db.VarChar(2000)
-  short_description String     @db.VarChar(255)
+  image             String
+  describe          String
+  short_description String
   star              Int
-  id_job_catalog    Int
-  id_creator        Int
+  id_job_catalog    String
+  id_creator        String
   creator           User       @relation(fields: [id_creator], references: [id_user])
   hiredBy           HireJob[]
   comments          Comment[]
@@ -70,9 +68,9 @@ model Job {
 }
 
 model HireJob {
-  id_hire_job Int      @id @default(autoincrement())
-  id_job      Int
-  id_user     Int
+  id_hire_job String     @id @default(auto()) @map("_id") @db.ObjectId
+  id_job      String
+  id_user     String
   date_hire   DateTime
   complete    Boolean
   job         Job      @relation(fields: [id_job], references: [id_job])
@@ -80,11 +78,11 @@ model HireJob {
 }
 
 model Comment {
-  id_comment   Int      @id @default(autoincrement())
-  id_job       Int
-  id_user      Int
+  id_comment   String     @id @default(auto()) @map("_id") @db.ObjectId
+  id_job       String
+  id_user      String
   date_comment DateTime
-  content      String   @db.VarChar(255)
+  content      String
   star_comment Int
   job          Job      @relation(fields: [id_job], references: [id_job])
   user         User     @relation(fields: [id_user], references: [id_user])

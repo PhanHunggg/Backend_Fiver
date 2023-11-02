@@ -45,3 +45,8 @@ export class SignUpInterface {
     hash?: string;
 
 }
+
+export class refreshTokensInterface {
+    userId: string;
+    refreshToken: string;
+}

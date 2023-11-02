@@ -18,7 +18,7 @@ export class LoaiCongViecService {
     async findTypeJob(res: any, id_type_job: string) {
         const checkTypeDetail = await this.prisma.typeJob.findFirst({
             where: {
-                id_type_job: Number(id_type_job)
+                id_type_job: id_type_job
             }
         })
 
@@ -67,7 +67,7 @@ export class LoaiCongViecService {
 
         const checkTypeJob = await this.prisma.typeJob.findFirst({
             where: {
-                id_type_job: Number(id_type_job)
+                id_type_job: id_type_job
             }
         })
 
@@ -83,7 +83,7 @@ export class LoaiCongViecService {
         await this.prisma.typeJob.update({
             data: newData,
             where: {
-                id_type_job: Number(id_type_job)
+                id_type_job: id_type_job
             }
         })
 

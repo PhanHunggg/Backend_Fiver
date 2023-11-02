@@ -29,7 +29,7 @@ export class CongViecService {
     async findJob(res: any, id_job: string) {
         const checkJob = await this.prisma.job.findFirst({
             where: {
-                id_job: Number(id_job)
+                id_job: id_job
             }
         })
 
@@ -44,7 +44,7 @@ export class CongViecService {
     async findJobByJobType(res: any, id_type_job: string) {
         const checkTypeJob = await this.prisma.typeJob.findFirst({
             where: {
-                id_type_job: Number(id_type_job)
+                id_type_job: id_type_job
             }
         })
 
@@ -55,7 +55,7 @@ export class CongViecService {
 
         const typeJob = await this.prisma.typeJob.findUnique({
             where: {
-                id_type_job: Number(id_type_job)
+                id_type_job: id_type_job
             },
             include: {
                 typeDetails:
@@ -87,7 +87,7 @@ export class CongViecService {
     async findJobByTypeDetail(res: any, id_type_detail: string) {
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
-                id_type_detail: Number(id_type_detail)
+                id_type_detail: id_type_detail
             }
         })
 
@@ -98,7 +98,7 @@ export class CongViecService {
 
         const typeDetail = await this.prisma.typeDetail.findUnique({
             where: {
-                id_type_detail: Number(id_type_detail)
+                id_type_detail: id_type_detail
             },
             include: {
                 jobCatalog:
@@ -125,7 +125,7 @@ export class CongViecService {
     async findJobByJobCatalog(res: any, id_job_catalog: string) {
         const checkJobCatalog = await this.prisma.jobCatalog.findFirst({
             where: {
-                id_job_catalog: Number(id_job_catalog)
+                id_job_catalog: id_job_catalog
             }
         })
 
@@ -136,7 +136,7 @@ export class CongViecService {
 
         const jobCatalog = await this.prisma.jobCatalog.findUnique({
             where: {
-                id_job_catalog: Number(id_job_catalog)
+                id_job_catalog: id_job_catalog
             },
             include: {
                 jobs: true
@@ -162,7 +162,7 @@ export class CongViecService {
 
             const checkUser = await this.prisma.user.findFirst({
                 where: {
-                    id_user: Number(job.id_creator)
+                    id_user: job.id_creator
                 }
             })
 
@@ -190,12 +190,12 @@ export class CongViecService {
                     star: Number(job.star),
                     creator: {
                         connect: {
-                            id_user: Number(job.id_creator)
+                            id_user: job.id_creator
                         }
                     },
                     jobCatalog: {
                         connect: {
-                            id_job_catalog: Number(job.id_job_catalog)
+                            id_job_catalog: job.id_job_catalog
                         }
                     }
                 }
@@ -214,7 +214,7 @@ export class CongViecService {
         try {
             const checkJob = await this.prisma.job.findFirst({
                 where: {
-                    id_job: Number(id_job),
+                    id_job: id_job,
                 }
             })
 
@@ -233,17 +233,17 @@ export class CongViecService {
                     star: Number(job.star),
                     creator: {
                         connect: {
-                            id_user: Number(job.id_creator)
+                            id_user: job.id_creator
                         }
                     },
                     jobCatalog: {
                         connect: {
-                            id_job_catalog: Number(job.id_job_catalog)
+                            id_job_catalog: job.id_job_catalog
                         }
                     }
                 },
                 where: {
-                    id_job: Number(id_job)
+                    id_job: id_job
                 }
             })
 
@@ -260,7 +260,7 @@ export class CongViecService {
 
             await this.prisma.job.update({
                 where: {
-                    id_job: Number(id_job)
+                    id_job: id_job
                 },
                 data: {
                     image: imgUrl
@@ -279,7 +279,7 @@ export class CongViecService {
 
         const checkJob = await this.prisma.job.findFirst({
             where: {
-                id_job: Number(id_job)
+                id_job: id_job
             }
         })
 
@@ -290,7 +290,7 @@ export class CongViecService {
 
         const checkHireJob = await this.prisma.hireJob.findFirst({
             where: {
-                id_job: Number(id_job)
+                id_job: id_job
             }
         })
 
@@ -301,7 +301,7 @@ export class CongViecService {
 
         await this.prisma.job.delete({
             where: {
-                id_job: Number(id_job)
+                id_job: id_job
             }
         })
 

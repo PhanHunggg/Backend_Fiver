@@ -31,7 +31,7 @@ export class ThueCongViecService {
         try {
             const checkHireJob = await this.prisma.hireJob.findFirst({
                 where: {
-                    id_hire_job: Number(id_hire_job)
+                    id_hire_job: id_hire_job
                 }
             });
 
@@ -50,7 +50,7 @@ export class ThueCongViecService {
         try {
             const checkHireJob = await this.prisma.hireJob.findFirst({
                 where: {
-                    id_job: Number(hireJob.id_job)
+                    id_job: hireJob.id_job
                 }
             })
 
@@ -88,7 +88,7 @@ export class ThueCongViecService {
         try {
             const checkHireJob = await this.prisma.hireJob.findFirst({
                 where: {
-                    id_hire_job: Number(id_hire_job)
+                    id_hire_job: id_hire_job
                 }
             })
 
@@ -99,7 +99,7 @@ export class ThueCongViecService {
 
             await this.prisma.hireJob.delete({
                 where: {
-                    id_hire_job: Number(id_hire_job)
+                    id_hire_job: id_hire_job
                 }
             })
 

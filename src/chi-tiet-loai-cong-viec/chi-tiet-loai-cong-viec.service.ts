@@ -38,7 +38,7 @@ export class ChiTietLoaiCongViecService {
                 image: imgUrl,
                 typeJob: {
                     connect: {
-                        id_type_job: Number(id_type_job)
+                        id_type_job: id_type_job
                     }
                 }
             }
@@ -62,7 +62,7 @@ export class ChiTietLoaiCongViecService {
     async findTypeDetailJob(res: any, id_type_detail: string) {
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
-                id_type_detail: Number(id_type_detail)
+                id_type_detail: id_type_detail
             }
         })
 
@@ -78,7 +78,7 @@ export class ChiTietLoaiCongViecService {
 
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
-                id_type_detail: Number(id_type_detail)
+                id_type_detail:id_type_detail
             }
         })
 
@@ -92,12 +92,12 @@ export class ChiTietLoaiCongViecService {
                 detail_name: type_detail.detail_name,
                 typeJob: {
                     connect: {
-                        id_type_job: Number(type_detail.id_type_job)
+                        id_type_job: type_detail.id_type_job
                     }
                 }
             },
             where: {
-                id_type_detail: Number(id_type_detail)
+                id_type_detail: id_type_detail
             }
         })
 
@@ -110,7 +110,7 @@ export class ChiTietLoaiCongViecService {
 
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
-                id_type_detail: Number(id_type_detail)
+                id_type_detail: id_type_detail
             }
         })
 
@@ -126,7 +126,7 @@ export class ChiTietLoaiCongViecService {
                 image: imgUrl
             },
             where: {
-                id_type_detail: Number(id_type_detail)
+                id_type_detail: id_type_detail
             }
         })
 
@@ -138,7 +138,7 @@ export class ChiTietLoaiCongViecService {
     async deleteTypeDetail(res: any, id_type_detail: string) {
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
-                id_type_detail: Number(id_type_detail)
+                id_type_detail: id_type_detail
             }
         })
 
@@ -149,7 +149,7 @@ export class ChiTietLoaiCongViecService {
 
         await this.prisma.typeDetail.delete({
             where: {
-                id_type_detail: Number(id_type_detail)
+                id_type_detail: id_type_detail
             }
         })
 

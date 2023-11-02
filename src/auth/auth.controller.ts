@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Response, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { LoginInterFace, SignUpInterface } from './interface';
+import { LoginInterFace, SignUpInterface, refreshTokensInterface } from './interface';
 import { Tokens } from './types';
 import { GetCurrentUser, GetCurrentUserId, Public } from '../common/decorators';
 import { AtGuard, RtGuard } from '../common/guards';
@@ -16,7 +16,7 @@ export class AuthController {
 
     @UseGuards(AtGuard)
     @Get('/profile')
-    profile(@GetCurrentUserId() userId: number, @Response() res: any): Promise<void> {
+    profile(@GetCurrentUserId() userId: string, @Response() res: any): Promise<void> {
         return this.authService.profile(res, userId);
     }
 
@@ -42,20 +42,18 @@ export class AuthController {
     
     @UseGuards(AtGuard)
     @Post('/logout')
-    logout(@GetCurrentUserId() userId: number, @Response() res: any): Promise<void> {
+    logout(@GetCurrentUserId() userId: string, @Response() res: any): Promise<void> {
         return this.authService.logout(res, userId);
     }
 
   
     @Public()
-    @UseGuards(RtGuard)
     @Post('/refresh')
     refreshTokens(
-        @GetCurrentUserId() userId: number,
-        @GetCurrentUser('refreshToken') refreshToken: string,
-        @Response() res: any
-    ): Promise<Tokens> {
-        return this.authService.refreshTokens(res, userId, refreshToken);
+        @Response() res: any,
+        @Body() body: refreshTokensInterface
+    )  {
+        return this.authService.refreshTokens(res, body);
     }
 
     
