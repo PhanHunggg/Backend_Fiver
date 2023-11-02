@@ -102,6 +102,16 @@ window.onload = function() {
         "post": {
           "operationId": "AuthController_refreshTokens",
           "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/refreshTokensInterface"
+                }
+              }
+            }
+          },
           "responses": {
             "201": {
               "description": ""
@@ -939,6 +949,10 @@ window.onload = function() {
             "certification"
           ]
         },
+        "refreshTokensInterface": {
+          "type": "object",
+          "properties": {}
+        },
         "TypeDetailInterface": {
           "type": "object",
           "properties": {
@@ -947,7 +961,7 @@ window.onload = function() {
               "description": "detail_name"
             },
             "id_type_job": {
-              "type": "number",
+              "type": "string",
               "description": "id_type_job"
             },
             "image": {
@@ -970,7 +984,7 @@ window.onload = function() {
               "description": "detail_name"
             },
             "id_type_job": {
-              "type": "number",
+              "type": "string",
               "description": "id_type_job"
             }
           },
@@ -1019,11 +1033,11 @@ window.onload = function() {
               "description": "star"
             },
             "id_job_catalog": {
-              "type": "number",
+              "type": "string",
               "description": "id_job_catalog"
             },
             "id_creator": {
-              "type": "number",
+              "type": "string",
               "description": "id_creator"
             }
           },
@@ -1054,11 +1068,11 @@ window.onload = function() {
           "type": "object",
           "properties": {
             "id_job": {
-              "type": "number",
+              "type": "string",
               "description": "id_job"
             },
             "id_user": {
-              "type": "number",
+              "type": "string",
               "description": "id_user"
             }
           },
@@ -1075,7 +1089,7 @@ window.onload = function() {
               "description": "name_job_catalog"
             },
             "id_type_detail": {
-              "type": "number",
+              "type": "string",
               "description": "id_type_detail"
             }
           },

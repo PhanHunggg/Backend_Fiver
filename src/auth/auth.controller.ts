@@ -39,23 +39,23 @@ export class AuthController {
             failCode(res, error.message)
         }
     }
-    
+
     @UseGuards(AtGuard)
     @Post('/logout')
     logout(@GetCurrentUserId() userId: string, @Response() res: any): Promise<void> {
         return this.authService.logout(res, userId);
     }
 
-  
+
     @Public()
     @Post('/refresh')
     refreshTokens(
         @Response() res: any,
         @Body() body: refreshTokensInterface
-    )  {
+    ): Promise<Tokens> {
         return this.authService.refreshTokens(res, body);
     }
 
-    
+
 }
 
