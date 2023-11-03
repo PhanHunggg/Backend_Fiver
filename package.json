@@ -33,6 +33,7 @@
     "class-validator": "^0.14.0",
     "cloudinary": "^1.40.0",
     "cookie": "^0.5.0",
+    "cors": "^2.8.5",
     "luxon": "^3.4.3",
     "mongodb": "^6.2.0",
     "reflect-metadata": "^0.1.13",

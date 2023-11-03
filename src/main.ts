@@ -4,6 +4,7 @@ import * as express from 'express';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { SwaggerModule } from "@nestjs/swagger"
 import { ValidationPipe } from '@nestjs/common';
+import cors from "cors";
 import { get } from 'https';
 import { createWriteStream, writeFileSync } from 'fs';
 import { resolve } from 'path';
@@ -17,11 +18,11 @@ async function bootstrap() {
 
   SwaggerModule.setup("swagger", app, document);
 
-  app.enableCors({
-    origin: '*',
-    methods: "*",
-  });
-
+  // app.enableCors({
+  //   origin: '*',
+  //   methods: "*",
+  // });
+ app.use(cors());
 
   app.use(express.static('.'))
   app.useGlobalPipes(new ValidationPipe());
