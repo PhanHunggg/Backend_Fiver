@@ -18,17 +18,15 @@ async function bootstrap() {
   SwaggerModule.setup("swagger", app, document);
 
   app.enableCors({
-    origin: 'http://localhost:5173', // Thay đổi origin theo nơi bạn muốn cho phép truy cập
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Accept',
-    credentials: true,
+    origin: '*',
+    methods: "*",
   });
 
-  
+
   app.use(express.static('.'))
   app.useGlobalPipes(new ValidationPipe());
-  
+
   await app.listen(8080);
-  
+
 }
 bootstrap();
