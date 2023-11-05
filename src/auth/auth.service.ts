@@ -71,13 +71,17 @@ export class AuthService {
 
             const hash = await this.hashData(user.password);
 
+            if(typeof user.birth_day === "string"){
+                user.birth_day = new Date(user.birth_day)
+            }
+
             const newUser = await this.prisma.user.create({
                 data: {
                     name: user.name,
                     email: user.email,
                     password: user.password,
                     phone: user.phone,
-                    birth_day: user.birth_day ? new Date(user.birth_day) : null,
+                    birth_day: user.birth_day,
                     gender: user.gender,
                     role: user.role,
                     skill: user.skill,

@@ -18,11 +18,7 @@ async function bootstrap() {
 
   SwaggerModule.setup("swagger", app, document);
 
-  // app.enableCors({
-  //   origin: '*',
-  //   methods: "*",
-  // });
- app.use(cors());
+  app.enableCors();
 
   app.use(express.static('.'))
   app.useGlobalPipes(new ValidationPipe());
