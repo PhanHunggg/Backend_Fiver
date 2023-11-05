@@ -2,11 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { SignUpInterface } from 'src/auth/interface';
 import { errCode, failCode, successCode } from '../response/index';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class NguoiDungService {
 
     prisma = new PrismaClient();
+
+    hashData(data: string) {
+        return bcrypt.hash(data, 10);
+    }
 
     async getUserList(res: any) {
         try {
@@ -65,19 +70,39 @@ export class NguoiDungService {
 
             if (!user.role) user.role = "NguoiDung"
 
-            const newData: SignUpInterface = user
 
-            newData.birth_day = new Date(user.birth_day)
+            if (typeof user.birth_day === "string") {
+                user.birth_day = new Date(user.birth_day)
+            }
+
+            if (user.gender === "false") {
+                user.gender = false
+            } else {
+                user.gender = true
+            }
+
+            const hash = await this.hashData(user.password);
 
             await this.prisma.user.update(
                 {
-                    data: newData,
+                    data: {
+                        name: user.name,
+                        email: user.email,
+                        password: user.password,
+                        phone: user.phone,
+                        birth_day: user.birth_day,
+                        gender: user.gender,
+                        role: user.role,
+                        skill: user.skill,
+                        certification: user.certification,
+                        hash: hash
+                    },
                     where: {
                         id_user: checkUser.id_user
                     }
                 }
             )
-            successCode(res, newData)
+            successCode(res, user)
         } catch (error) {
 
             failCode(res, error.message)

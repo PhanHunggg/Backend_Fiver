@@ -31,7 +31,7 @@ export class SignUpInterface {
     birth_day: Date | string;
 
     @ApiProperty({ description: "gender", type: Boolean })
-    gender: boolean;
+    gender: boolean | string;
 
     @ApiProperty({ description: "role", type: String })
     role: string;
