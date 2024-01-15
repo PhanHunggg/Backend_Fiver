@@ -9,6 +9,7 @@ import { UserProfile, UserSignUpDto } from './dto';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload, Tokens } from './types';
 import { errCode, failCode, successCode } from '../response/index';
+
 @Injectable()
 export class AuthService {
     constructor(
@@ -206,7 +207,7 @@ export class AuthService {
         const [at, rt] = await Promise.all([
             this.jwtService.signAsync(data, {
                 secret: this.config.get<string>('AT_SECRET'),
-                expiresIn: '15m',
+                expiresIn: '3d',
             }),
             this.jwtService.signAsync(data, {
                 secret: this.config.get<string>('RT_SECRET'),
