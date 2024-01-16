@@ -17,6 +17,10 @@ export class NguoiDungService {
         try {
             const userList = await this.prisma.user.findMany()
 
+            if (!userList) {
+                errCode(res, userList, "Không tìm thấy người dùng")
+                return
+            }
             successCode(res, userList)
         } catch (error) {
             failCode(res, error.message)
