@@ -26,7 +26,7 @@ export class ThueCongViecService {
         }
     }
 
-    async findHireJob(id_hire_job: string, res: any) {
+    async findHireJob(id_hire_job: number, res: any) {
 
         try {
             const checkHireJob = await this.prisma.hireJob.findFirst({
@@ -84,7 +84,7 @@ export class ThueCongViecService {
         }
     }
 
-    async deleteHireJob(res: any, id_hire_job: string) {
+    async deleteHireJob(res: any, id_hire_job: number) {
         try {
             const checkHireJob = await this.prisma.hireJob.findFirst({
                 where: {

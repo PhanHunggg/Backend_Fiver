@@ -17,7 +17,7 @@ export class DanhMucCongViecController {
 
   @Get("/tim-kiem-danh-muc-cong-viec/:id_job_catalog")
   findJobCatalog(@Response() res: any, @Param('id_job_catalog') id_job_catalog: string) {
-    return this.jobCatalogService.findJobCatalog(res, id_job_catalog);
+    return this.jobCatalogService.findJobCatalog(res, +id_job_catalog);
   }
 
   @Post("/them-danh-muc-cong-viec")
@@ -28,11 +28,11 @@ export class DanhMucCongViecController {
 
   @Put("/cap-nhat-danh-muc-cong-viec/:id_job_catalog")
   updateJobCatalog(@Response() res: any, @Body() body: JobCatalogInterface, @Param('id_job_catalog') id_job_catalog: string) {
-    return this.jobCatalogService.updateJobCatalog(res, body, id_job_catalog)
+    return this.jobCatalogService.updateJobCatalog(res, body, +id_job_catalog)
   }
 
   @Delete("/xoa-danh-muc-cong-viec/:id_job_catalog")
   deleteJobCatalog(@Response() res: any, @Param('id_job_catalog') id_job_catalog: string) {
-    return this.jobCatalogService.deleteJobCatalog(res, id_job_catalog)
+    return this.jobCatalogService.deleteJobCatalog(res, +id_job_catalog)
   }
 }

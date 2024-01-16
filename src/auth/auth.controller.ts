@@ -16,7 +16,7 @@ export class AuthController {
 
     @UseGuards(AtGuard)
     @Get('/profile')
-    profile(@GetCurrentUserId() userId: string, @Response() res: any): Promise<void> {
+    profile(@GetCurrentUserId() userId: number, @Response() res: any): Promise<void> {
         return this.authService.profile(res, userId);
     }
 
@@ -42,7 +42,7 @@ export class AuthController {
 
     @UseGuards(AtGuard)
     @Post('/logout')
-    logout(@GetCurrentUserId() userId: string, @Response() res: any): Promise<void> {
+    logout(@GetCurrentUserId() userId: number, @Response() res: any): Promise<void> {
         return this.authService.logout(res, userId);
     }
 
@@ -52,7 +52,7 @@ export class AuthController {
     refreshTokens(
         @Response() res: any,
         @Body() body: refreshTokensInterface
-    ): Promise<Tokens> {
+    ): Promise<void> {
         return this.authService.refreshTokens(res, body);
     }
 

@@ -19,7 +19,7 @@ export class ChiTietLoaiCongViecController {
 
     @Get("/tim-kiem-chi-tiet-loai-cong-viec/:id_type_detail")
     findTypeDetailJob(@Response() res: any, @Param("id_type_detail") id_type_detail: string) {
-        return this.typeDetailJobService.findTypeDetailJob(res, id_type_detail)
+        return this.typeDetailJobService.findTypeDetailJob(res, +id_type_detail)
     }
 
 
@@ -32,7 +32,7 @@ export class ChiTietLoaiCongViecController {
 
     @Put("/cap-nhat-chi-tiet-loai-cong-viec/:id_type_detail")
     updateTypeDetailJob(@Response() res: any, @Param('id_type_detail') id_type_detail: string, @Body() body: UpdateTypeDetailInterface) {
-        return this.typeDetailJobService.updateTypeDetailJob(res, body, id_type_detail);
+        return this.typeDetailJobService.updateTypeDetailJob(res, body, +id_type_detail);
     }
 
     @Put("/cap-nhat-hinh-anh-chi-tiet-loai/:id_type_detail")
@@ -43,13 +43,13 @@ export class ChiTietLoaiCongViecController {
     })
     @UseInterceptors(FileInterceptor('image'))
     updateImgTypeDetail(@Response() res: any, @Param('id_type_detail') id_type_detail: string, @UploadedFile() file: Express.Multer.File) {
-        return this.typeDetailJobService.updateImgTypeDetail(res, id_type_detail, file)
+        return this.typeDetailJobService.updateImgTypeDetail(res, +id_type_detail, file)
     }
 
     @Delete("/xoa-chi-tiet-loai/:id_type_detail")
     deleteTypeDetail(@Response() res: any, @Param('id_type_detail') id_type_detail: string) {
 
-        return this.typeDetailJobService.deleteTypeDetail(res, id_type_detail)
+        return this.typeDetailJobService.deleteTypeDetail(res, +id_type_detail)
     }
 
     

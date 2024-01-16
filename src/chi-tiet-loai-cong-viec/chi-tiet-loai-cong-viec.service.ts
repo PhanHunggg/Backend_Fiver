@@ -59,7 +59,7 @@ export class ChiTietLoaiCongViecService {
         successCode(res, checkTypeDetail)
     }
 
-    async findTypeDetailJob(res: any, id_type_detail: string) {
+    async findTypeDetailJob(res: any, id_type_detail: number) {
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
                 id_type_detail: id_type_detail
@@ -74,7 +74,7 @@ export class ChiTietLoaiCongViecService {
         successCode(res, checkTypeDetail)
     }
 
-    async updateTypeDetailJob(res: any, type_detail: UpdateTypeDetailInterface, id_type_detail: string) {
+    async updateTypeDetailJob(res: any, type_detail: UpdateTypeDetailInterface, id_type_detail: number) {
 
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
@@ -106,7 +106,7 @@ export class ChiTietLoaiCongViecService {
 
     }
 
-    async updateImgTypeDetail(res: any, id_type_detail: string, image: Express.Multer.File) {
+    async updateImgTypeDetail(res: any, id_type_detail: number, image: Express.Multer.File) {
 
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
@@ -135,7 +135,7 @@ export class ChiTietLoaiCongViecService {
 
     }
 
-    async deleteTypeDetail(res: any, id_type_detail: string) {
+    async deleteTypeDetail(res: any, id_type_detail: number) {
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
                 id_type_detail: id_type_detail

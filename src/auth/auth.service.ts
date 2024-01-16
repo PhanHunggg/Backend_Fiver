@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import { } from 'rxjs';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -43,7 +42,7 @@ export class AuthService {
 
             const tokens = await this.getTokens(checkUser)
 
-            await this.updateRtHash(checkUser.id_user, tokens.refreshToken)
+            await this.updateRtHash(res, checkUser.id_user, tokens.refreshToken)
 
             successCode(res, tokens)
 
@@ -76,32 +75,27 @@ export class AuthService {
                 user.birth_day = new Date(user.birth_day)
             }
 
-            if (user.gender === "false") {
-                user.gender = false
+            let gender: boolean
+
+            if (user.gender === "false" || user.gender === false) {
+                gender = false
             } else {
-                user.gender = true
+                gender = true
             }
 
             const newUser = await this.prisma.user.create({
                 data: {
-                    name: user.name,
-                    email: user.email,
-                    password: user.password,
-                    phone: user.phone,
-                    birth_day: user.birth_day,
-                    gender: user.gender,
-                    role: user.role,
-                    skill: user.skill,
-                    certification: user.certification,
+                    ...user,
+                    gender,
                     hash: hash
                 }
             });
 
             const tokens = await this.getTokens(newUser);
 
-            await this.updateRtHash(newUser.id_user, tokens.refreshToken);
+            await this.updateRtHash(res, newUser.id_user, tokens.refreshToken);
 
-            successCode(res, tokens);
+            successCode(res, { tokens, user });
         } catch (error) {
             failCode(res, error.message);
         }
@@ -109,7 +103,7 @@ export class AuthService {
 
 
 
-    async logout(res: any, userId: string): Promise<void> {
+    async logout(res: any, userId: number): Promise<void> {
         await this.prisma.user.updateMany({
             where: {
                 id_user: userId,
@@ -125,7 +119,7 @@ export class AuthService {
         successCode(res, userId)
     }
 
-    async profile(res: any, userId: string): Promise<void> {
+    async profile(res: any, userId: number): Promise<void> {
         try {
             const checkUser = await this.prisma.user.findUnique({
                 where: {
@@ -155,36 +149,44 @@ export class AuthService {
         }
     }
 
-    async refreshTokens(res, rt: refreshTokensInterface): Promise<Tokens> {
-        const user = await this.prisma.user.findUnique({
-            where: {
-                id_user: rt.userId,
-            },
-        });
-        if (!user || !user.hashedRt) throw new ForbiddenException('Access Denied');
+    async refreshTokens(res: any, rt: refreshTokensInterface): Promise<void> {
+        try {
+            const user = await this.prisma.user.findUnique({
+                where: {
+                    id_user: rt.userId,
+                },
+            });
+            if (!user || !user.hashedRt) throw new ForbiddenException('Access Denied');
 
-        const rtMatches = await bcrypt.compare(rt.refreshToken, user.hashedRt);
+            const rtMatches = await bcrypt.compare(rt.refreshToken, user.hashedRt);
 
-        if (!rtMatches) throw new ForbiddenException('Access Denied');
+            if (!rtMatches) throw new ForbiddenException('Access Denied');
 
-        const tokens = await this.getTokens(user);
+            const tokens = await this.getTokens(user);
 
-        await this.updateRtHash(user.id_user, tokens.refreshToken);
+            await this.updateRtHash(res, user.id_user, tokens.refreshToken);
 
-        successCode(res, tokens)
-        return tokens
+            successCode(res, tokens)
+        } catch (error) {
+            failCode(res, error.message)
+        }
     }
 
-    async updateRtHash(userId: string, rt: string) {
-        const hash = await this.hashData(rt)
-        await this.prisma.user.update({
-            where: {
-                id_user: userId
-            },
-            data: {
-                hashedRt: hash
-            }
-        })
+    async updateRtHash(res: any, userId: number, rt: string) {
+        try {
+            const hash = await this.hashData(rt)
+            await this.prisma.user.update({
+                where: {
+                    id_user: userId
+                },
+                data: {
+                    hashedRt: hash
+                }
+            })
+        } catch (error) {
+            failCode(res, error.message)
+
+        }
     }
 
     hashData(data: string) {

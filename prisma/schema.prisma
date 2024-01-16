@@ -2,43 +2,47 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 generator client {
   provider = "prisma-client-js"
 }
+
+// Updated model for MySQL with Int IDs and auto-increment
+
 model TypeJob {
-  id_type_job   String       @id @default(auto()) @map("_id") @db.ObjectId
+  id_type_job   Int          @id @default(autoincrement())
   type_job_name String
   typeDetails   TypeDetail[]
 }
 
 model TypeDetail {
-  id_type_detail String        @id @default(auto()) @map("_id") @db.ObjectId
+  id_type_detail Int          @id @default(autoincrement())
+  id_type_job    Int
   detail_name    String
   image          String
-  id_type_job    String
   typeJob        TypeJob      @relation(fields: [id_type_job], references: [id_type_job])
   jobCatalog     JobCatalog[]
 }
 
 model JobCatalog {
-  id_job_catalog   String       @id @default(auto()) @map("_id") @db.ObjectId
+  id_job_catalog   Int        @id @default(autoincrement())
+  id_type_detail   Int
   name_job_catalog String
-  id_type_detail   String
   typeDetail       TypeDetail @relation(fields: [id_type_detail], references: [id_type_detail])
   jobs             Job[]
 }
 
 model User {
-  id_user       String      @id @default(auto()) @map("_id") @db.ObjectId
+  id_user       Int       @id @default(autoincrement())
   name          String
   email         String
   password      String
   phone         String
-  birth_day     DateTime? // Có thể cần thay đổi kiểu dữ liệu tại đây
+  birth_day     DateTime?
   gender        Boolean
   role          String
   skill         String
@@ -51,7 +55,9 @@ model User {
 }
 
 model Job {
-  id_job            String       @id @default(auto()) @map("_id") @db.ObjectId
+  id_job            Int        @id @default(autoincrement())
+  id_job_catalog    Int
+  id_creator        Int
   job_name          String
   rate              String
   salary            Int
@@ -59,8 +65,6 @@ model Job {
   describe          String
   short_description String
   star              Int
-  id_job_catalog    String
-  id_creator        String
   creator           User       @relation(fields: [id_creator], references: [id_user])
   hiredBy           HireJob[]
   comments          Comment[]
@@ -68,9 +72,9 @@ model Job {
 }
 
 model HireJob {
-  id_hire_job String     @id @default(auto()) @map("_id") @db.ObjectId
-  id_job      String
-  id_user     String
+  id_hire_job Int      @id @default(autoincrement())
+  id_job      Int
+  id_user     Int
   date_hire   DateTime
   complete    Boolean
   job         Job      @relation(fields: [id_job], references: [id_job])
@@ -78,9 +82,9 @@ model HireJob {
 }
 
 model Comment {
-  id_comment   String     @id @default(auto()) @map("_id") @db.ObjectId
-  id_job       String
-  id_user      String
+  id_comment   Int      @id @default(autoincrement())
+  id_job       Int
+  id_user      Int
   date_comment DateTime
   content      String
   star_comment Int

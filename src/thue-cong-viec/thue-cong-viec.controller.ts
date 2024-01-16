@@ -15,7 +15,7 @@ export class ThueCongViecController {
 
     @Get("/tim-kiem-cong-viec-da-duoc-thue/:id_hire_job")
     findHireJob(@Response() res: any, @Param("id_hire_job") id_hire_job: string) {
-        return this.hireJobService.findHireJob(id_hire_job, res);
+        return this.hireJobService.findHireJob(+id_hire_job, res);
     }
 
     @Post("/them-cong-viec-duoc-thue")
@@ -25,7 +25,7 @@ export class ThueCongViecController {
 
     @Delete("/xoa-cong-viec-da-thue/:id_hire_job")
     deleteHireJob(@Response() res: any, @Param("id_hire_job") id_hire_job: string) {
-        return this.hireJobService.deleteHireJob(res, id_hire_job);
+        return this.hireJobService.deleteHireJob(res, +id_hire_job);
     }
 
 }

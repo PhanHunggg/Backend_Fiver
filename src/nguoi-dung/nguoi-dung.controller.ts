@@ -24,7 +24,7 @@ export class NguoiDungController {
     @Get("/tim-kiem-nguoi-dung/:id_user")
     findUser(@Response() res: any, @Param("id_user") id_user: string) {
         try {
-            return this.userService.findUser(res, id_user);
+            return this.userService.findUser(res, +id_user);
         } catch (error) {
             failCode(res, error.message)
 
@@ -42,10 +42,10 @@ export class NguoiDungController {
         }
     }
 
-    @Put("/cap-nhat-nguoi-dung/:id")
-    updateUser(@Response() res: any, @Body() body: SignUpInterface, @Param("id") id: string) {
+    @Put("/cap-nhat-nguoi-dung/:id_user")
+    updateUser(@Response() res: any, @Body() body: SignUpInterface, @Param("id_user") id_user: string) {
         try {
-            return this.userService.updateUser(res, body, id);
+            return this.userService.updateUser(res, body, +id_user);
         } catch (error) {
             failCode(res, error.message)
 

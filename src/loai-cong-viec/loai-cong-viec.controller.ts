@@ -15,7 +15,7 @@ export class LoaiCongViecController {
 
     @Get("/tim-kiem-loai-cong-viec/:id_type_job")
     findTypeJob(@Response() res: any, @Param("id_type_job") id_type_job: string) {
-        return this.typeJobService.findTypeJob(res, id_type_job)
+        return this.typeJobService.findTypeJob(res, +id_type_job)
     }
 
     @Post("/tao-loai-cong-viec")
@@ -26,7 +26,7 @@ export class LoaiCongViecController {
     @Put("/cap-nhat-loai-cong-viec/:id_type_job")
     updateTypeJob(@Response() res: any, @Body() body: createTypeJobInterface, @Param('id_type_job') id_type_job: string) {
 
-        return this.typeJobService.updateTypeJob(res, body, id_type_job);
+        return this.typeJobService.updateTypeJob(res, body, +id_type_job);
 
     }
 }

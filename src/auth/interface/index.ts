@@ -33,20 +33,19 @@ export class SignUpInterface {
     @ApiProperty({ description: "gender", type: Boolean })
     gender: boolean | string;
 
-    @ApiProperty({ description: "role", type: String })
     role: string;
 
     @ApiProperty({ description: "skill", type: String })
     skill: string;
 
     @ApiProperty({ description: "certification", type: String })
-    certification?: string;
+    certification: string;
 
     hash?: string;
 
 }
 
 export class refreshTokensInterface {
-    userId: string;
+    userId: number;
     refreshToken: string;
 }

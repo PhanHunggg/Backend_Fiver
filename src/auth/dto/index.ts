@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export interface UserSignUpDto {
-    id_user: string;
+    id_user: number;
     name: string;
     email: string;
     password: string;
@@ -16,7 +16,7 @@ export interface UserSignUpDto {
 }
 
 export type UserProfile = {
-    id_user: string,
+    id_user: number,
     name: string;
     email: string;
     phone: string;

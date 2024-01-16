@@ -42,7 +42,7 @@ export class DanhMucCongViecService {
 
     }
 
-    async findJobCatalog(res: any, id_job_catalog: string) {
+    async findJobCatalog(res: any, id_job_catalog: number) {
         const checkJobCatalog = await this.prisma.jobCatalog.findFirst({
             where: {
                 id_job_catalog: id_job_catalog
@@ -57,7 +57,7 @@ export class DanhMucCongViecService {
         successCode(res, checkJobCatalog)
     }
 
-    async updateJobCatalog(res: any, jobCatalog: JobCatalogInterface, id_job_catalog: string) {
+    async updateJobCatalog(res: any, jobCatalog: JobCatalogInterface, id_job_catalog: number) {
         const checkJobCatalog = await this.prisma.jobCatalog.findFirst({
             where: {
                 id_job_catalog: id_job_catalog
@@ -79,7 +79,7 @@ export class DanhMucCongViecService {
         successCode(res, jobCatalog);
     }
 
-    async deleteJobCatalog(res: any, id_job_catalog: string) {
+    async deleteJobCatalog(res: any, id_job_catalog: number) {
         const chekcJobCatalog = await this.prisma.jobCatalog.findFirst({
             where: {
                 id_job_catalog: id_job_catalog

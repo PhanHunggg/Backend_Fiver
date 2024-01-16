@@ -26,7 +26,7 @@ export class CongViecService {
         }
     }
 
-    async findJob(res: any, id_job: string) {
+    async findJob(res: any, id_job: number) {
         const checkJob = await this.prisma.job.findFirst({
             where: {
                 id_job: id_job
@@ -41,7 +41,7 @@ export class CongViecService {
         successCode(res, checkJob)
     }
 
-    async findJobByJobType(res: any, id_type_job: string) {
+    async findJobByJobType(res: any, id_type_job: number) {
         const checkTypeJob = await this.prisma.typeJob.findFirst({
             where: {
                 id_type_job: id_type_job
@@ -84,7 +84,7 @@ export class CongViecService {
 
     }
 
-    async findJobByTypeDetail(res: any, id_type_detail: string) {
+    async findJobByTypeDetail(res: any, id_type_detail: number) {
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({
             where: {
                 id_type_detail: id_type_detail
@@ -122,7 +122,7 @@ export class CongViecService {
 
     }
 
-    async findJobByJobCatalog(res: any, id_job_catalog: string) {
+    async findJobByJobCatalog(res: any, id_job_catalog: number) {
         const checkJobCatalog = await this.prisma.jobCatalog.findFirst({
             where: {
                 id_job_catalog: id_job_catalog
@@ -210,7 +210,7 @@ export class CongViecService {
 
     }
 
-    async updateJob(res: any, job: JobInterface, id_job: string) {
+    async updateJob(res: any, job: JobInterface, id_job: number) {
         try {
             const checkJob = await this.prisma.job.findFirst({
                 where: {
@@ -253,7 +253,7 @@ export class CongViecService {
         }
     }
 
-    async updateImgJob(res: any, id_job: string, file: Express.Multer.File) {
+    async updateImgJob(res: any, id_job: number, file: Express.Multer.File) {
 
         try {
             const imgUrl = await this.cloudinary.uploadImage(file)
@@ -275,7 +275,7 @@ export class CongViecService {
 
     }
 
-    async deleteJob(res: any, id_job: string) {
+    async deleteJob(res: any, id_job: number) {
 
         const checkJob = await this.prisma.job.findFirst({
             where: {

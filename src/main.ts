@@ -4,10 +4,6 @@ import * as express from 'express';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { SwaggerModule } from "@nestjs/swagger"
 import { ValidationPipe } from '@nestjs/common';
-import cors from "cors";
-import { get } from 'https';
-import { createWriteStream, writeFileSync } from 'fs';
-import { resolve } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

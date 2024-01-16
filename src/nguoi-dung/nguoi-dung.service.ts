@@ -23,7 +23,7 @@ export class NguoiDungService {
         }
     }
 
-    async findUser(res: any, id_user: string) {
+    async findUser(res: any, id_user: number) {
         const checkUser = await this.prisma.user.findFirst({
             where: {
                 id_user: id_user,
@@ -57,11 +57,11 @@ export class NguoiDungService {
         }
     }
 
-    async updateUser(res: any, user: SignUpInterface, id: string) {
+    async updateUser(res: any, user: SignUpInterface, id_user: number) {
         try {
             const checkUser = await this.prisma.user.findFirst({
                 where: {
-                    id_user: id,
+                    id_user: id_user,
                 }
             })
 

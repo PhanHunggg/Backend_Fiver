@@ -15,7 +15,7 @@ export class LoaiCongViecService {
         successCode(res, checkTypeUser)
     }
 
-    async findTypeJob(res: any, id_type_job: string) {
+    async findTypeJob(res: any, id_type_job: number) {
         const checkTypeDetail = await this.prisma.typeJob.findFirst({
             where: {
                 id_type_job: id_type_job
@@ -57,7 +57,7 @@ export class LoaiCongViecService {
 
     }
 
-    async updateTypeJob(res: any, typeJob: createTypeJobInterface, id_type_job: string) {
+    async updateTypeJob(res: any, typeJob: createTypeJobInterface, id_type_job: number) {
         const { type_job_name } = typeJob;
 
         if (!type_job_name) {
