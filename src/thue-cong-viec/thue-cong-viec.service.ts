@@ -8,7 +8,6 @@ import { errCode, failCode, successCode } from '../response/index';
 export class ThueCongViecService {
 
     prisma = new PrismaClient();
-    localModule = require('../response/index');
 
     async getHireJobList(res: any) {
 
