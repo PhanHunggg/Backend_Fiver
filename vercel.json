@@ -15,7 +15,8 @@
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/feedback/((?!general).*)",
+      "destination": "/api/feedback/general",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },
