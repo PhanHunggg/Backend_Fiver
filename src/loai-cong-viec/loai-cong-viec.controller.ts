@@ -18,6 +18,10 @@ export class LoaiCongViecController {
         return this.typeJobService.findTypeJob(res, +id_type_job)
     }
 
+    @Get("/job-nav-bar")
+    getJobNavBar(@Response() res: any) {
+        return this.typeJobService.getJobNavBar(res);
+    }
     @Post("/tao-loai-cong-viec")
     createTypeJob(@Response() res: any, @Body() body: createTypeJobInterface) {
         return this.typeJobService.createTypeJob(res, body);

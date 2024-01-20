@@ -23,7 +23,6 @@ model TypeDetail {
   id_type_detail Int          @id @default(autoincrement())
   id_type_job    Int
   detail_name    String
-  image          String
   typeJob        TypeJob      @relation(fields: [id_type_job], references: [id_type_job])
   jobCatalog     JobCatalog[]
 }

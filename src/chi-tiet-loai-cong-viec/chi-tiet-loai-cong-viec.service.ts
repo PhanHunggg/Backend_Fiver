@@ -13,7 +13,7 @@ export class ChiTietLoaiCongViecService {
 
     prisma = new PrismaClient();
 
-    async createTypeDetailJob(res: any, job: TypeDetailInterface, image: Express.Multer.File) {
+    async createTypeDetailJob(res: any, job: TypeDetailInterface) {
 
         const typeDetailJobList = await this.prisma.typeDetail.findMany();
 
@@ -30,12 +30,10 @@ export class ChiTietLoaiCongViecService {
 
         const { detail_name, id_type_job } = job
 
-        const imgUrl = await this.cloudinary.uploadImage(image)
 
         await this.prisma.typeDetail.create({
             data: {
                 detail_name,
-                image: imgUrl,
                 typeJob: {
                     connect: {
                         id_type_job: id_type_job
@@ -106,34 +104,6 @@ export class ChiTietLoaiCongViecService {
 
     }
 
-    async updateImgTypeDetail(res: any, id_type_detail: number, image: Express.Multer.File) {
-
-        const checkTypeDetail = await this.prisma.typeDetail.findFirst({
-            where: {
-                id_type_detail: id_type_detail
-            }
-        })
-
-        if (!checkTypeDetail) {
-            errCode(res, id_type_detail, "Không tìm thấy chi tiết loại công việc")
-            return;
-        }
-
-        const imgUrl = await this.cloudinary.uploadImage(image)
-
-        await this.prisma.typeDetail.update({
-            data: {
-                image: imgUrl
-            },
-            where: {
-                id_type_detail: id_type_detail
-            }
-        })
-
-        successCode(res, imgUrl)
-
-
-    }
 
     async deleteTypeDetail(res: any, id_type_detail: number) {
         const checkTypeDetail = await this.prisma.typeDetail.findFirst({

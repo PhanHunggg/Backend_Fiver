@@ -15,6 +15,25 @@ export class LoaiCongViecService {
         successCode(res, checkTypeUser)
     }
 
+    async getJobNavBar(res: any) {
+        const checkJob = await this.prisma.typeJob.findMany({
+            include: {
+                typeDetails: {
+                    include: {
+                        jobCatalog: true
+                    }
+                }
+            }
+        })
+
+        if (checkJob.length === 0) {
+            errCode(res, checkJob, "Không có dữ liệu!");
+            return
+        }
+
+        successCode(res, checkJob)
+    }
+
     async findTypeJob(res: any, id_type_job: number) {
         const checkTypeDetail = await this.prisma.typeJob.findFirst({
             where: {
