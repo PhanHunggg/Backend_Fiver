@@ -5,5 +5,6 @@ import { LoaiCongViecController } from './loai-cong-viec.controller';
 @Module({
   providers: [LoaiCongViecService],
   controllers: [LoaiCongViecController]
+  
 })
 export class LoaiCongViecModule {}
