@@ -13,7 +13,6 @@ export class AuthController {
 
     constructor(private readonly authService: AuthService) { }
 
-
     @UseGuards(AtGuard)
     @Get('/profile')
     profile(@GetCurrentUserId() userId: number, @Response() res: any): Promise<void> {
@@ -45,7 +44,6 @@ export class AuthController {
     logout(@GetCurrentUserId() userId: number, @Response() res: any): Promise<void> {
         return this.authService.logout(res, userId);
     }
-
 
     @Public()
     @Post('/refresh')
